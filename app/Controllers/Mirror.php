@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use stdClass;
 use CodeIgniter\API\ResponseTrait;
 
 class Mirror extends BaseController
@@ -13,22 +12,39 @@ class Mirror extends BaseController
     public function index()
     {
         $host = $this->request->getHeader('host')->getValue();
-        // $this->devout($host);
+        // $this->devOut($host);
         // echo $host . '<br>';
-        $auth = $this->request->getHeader('authorization')->getValue();
-        // $this->devout($auth);
+
+        $auth = $this->request->getHeader('authorization') ? $this->request->getHeader('authorization')->getValue() : '';
+        // $this->devOut($auth);
         // echo $auth . '<br>';
 
-        // $this->devout($this->request->getBody());
+        $method = $this->request->getMethod();
+        $urlParms = $this->request->getGet();
+        // $this->devOut($urlParms);
+        // $this->devOut($this->request->getBody());
         $resp = [];
         $resp['host'] = $host;
+        $resp['method'] = $method;
         $resp['authorization'] = $auth;
+        $resp['urlParams'] = $urlParms;
         $resp['requestBody'] = json_decode($this->request->getBody());
 
         return $this->response->setJson($resp);
     }
 
-    private function devout($obj)
+    public function delete()
+    {
+        $resp = [];
+        $resp['host'] = $this->request->getHeader('host')->getValue();
+        $resp['method'] = $this->request->getMethod();
+        $resp['authorization'] = $this->request->getHeader('authorization') ? $this->request->getHeader('authorization')->getValue() : '';
+        $resp['urlParams'] = $this->request->getGet();
+        $resp['requestBody'] = $this->request->getBody() ? json_decode($this->request->getBody()) : [];
+        return $this->response->setJson($resp);
+    }
+
+    private function devOut($obj)
     {
         echo '<pre>';
         print_r($obj);

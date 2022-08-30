@@ -38,6 +38,8 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 $routes->get('/health', 'Health::index');
 $routes->post('/mirror', 'Mirror::index');
+$routes->put('/mirror', 'Mirror::index');
+$routes->delete('/mirror', 'Mirror::delete');
 
 /*
  * --------------------------------------------------------------------
