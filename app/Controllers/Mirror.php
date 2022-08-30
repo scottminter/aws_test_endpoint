@@ -12,19 +12,18 @@ class Mirror extends BaseController
 
     public function index()
     {
-        $host = (string) $this->request->getHeader('host');
+        $host = $this->request->getHeader('host')->getValue();
+        // $this->devout($host);
         // echo $host . '<br>';
-        $auth = (string) $this->request->getHeader('authorization');
+        $auth = $this->request->getHeader('authorization')->getValue();
+        // $this->devout($auth);
         // echo $auth . '<br>';
-        $resp = [];
-        $resp['host'] = $host; // $this->request->getHeader('host');
-        $resp['authorization'] = $auth; // $this->request->getHeader('authorization');
-        $resp['requestBody'] = json_decode($this->request->getBody());
 
-        // $this->devout($resp);
-        // $this->devout($this->request->getHeader('Host')->name);
-        // $this->devout($this->request->getHeader('authorization'));
         // $this->devout($this->request->getBody());
+        $resp = [];
+        $resp['host'] = $host;
+        $resp['authorization'] = $auth;
+        $resp['requestBody'] = json_decode($this->request->getBody());
 
         return $this->response->setJson($resp);
     }
