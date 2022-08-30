@@ -13,6 +13,6 @@ class Health extends BaseController
     {
         $resp = new stdClass();
         $resp->message = 'API is working!';
-        return $this->respond($resp);
+        return $this->response->setJson($resp);
     }
 }
