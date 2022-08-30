@@ -19,7 +19,7 @@ class Mirror extends BaseController
         // $this->devOut($auth);
         // echo $auth . '<br>';
 
-        $method = $this->request->getMethod();
+        $method = strtoupper($this->request->getMethod());
         $urlParms = $this->request->getGet();
         // $this->devOut($urlParms);
         // $this->devOut($this->request->getBody());
@@ -37,7 +37,7 @@ class Mirror extends BaseController
     {
         $resp = [];
         $resp['host'] = $this->request->getHeader('host')->getValue();
-        $resp['method'] = $this->request->getMethod();
+        $resp['method'] = strtoupper($this->request->getMethod());
         $resp['authorization'] = $this->request->getHeader('authorization') ? $this->request->getHeader('authorization')->getValue() : '';
         $resp['urlParams'] = $this->request->getGet();
         $resp['requestBody'] = $this->request->getBody() ? json_decode($this->request->getBody()) : [];
