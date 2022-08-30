@@ -14,6 +14,9 @@ class Mirror extends BaseController
     {
         $resp = new stdClass();
         $resp->test = 'Look at this go!';
-        return $this->respond($this->request->getBody());
+        // echo '<pre>';
+        // print_r($this->request);
+        // echo '</pre>';
+        return $this->response->setJson($this->request);
     }
 }
