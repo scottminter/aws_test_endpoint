@@ -37,6 +37,7 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('/health', 'Health::index');
+$routes->get('/mirror', 'Mirror::index');
 $routes->post('/mirror', 'Mirror::index');
 $routes->put('/mirror', 'Mirror::index');
 $routes->delete('/mirror', 'Mirror::delete');
